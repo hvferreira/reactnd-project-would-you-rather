@@ -17,7 +17,17 @@ export class Dashboard extends Component {
         //return <Tab panes={panes({ userQuestionData })} className="tab" />;
         return (
             <div>
-                <h1>{userQuestionData.answered[0].id}</h1></div>
+                <h1>{userQuestionData.answered[0].id}</h1>
+
+
+                {userQuestionData.unanswered.map(question => (
+                    <UserCard
+                        key={question.id}
+                        question_id={question.id}
+                        unanswered={false}
+                    />
+                ))}
+            </div>
 
         )
 
@@ -27,9 +37,7 @@ export class Dashboard extends Component {
 
 
 function mapStateToProps({ authedUser, users, questions }) {
-    // console.log('authUser', authedUser)
-    // console.log('users', users)
-    console.log('questions', questions)
+
     const answeredIds = Object.keys(users[authedUser].answers);
     const answered = Object.values(questions)
         .filter(question => !answeredIds.includes(question.id))
