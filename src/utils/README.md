@@ -8,7 +8,7 @@ This app is the second of three projects required for Udacity's React Nanodegree
 The code was bootstrapped with Create React App.
 
 Installation
-$ git clone https://github.com/james-priest/reactnd-project-would-you-rather.git
+$ git clone https://github.com/hvferreira/reactnd-project-would-you-rather
 $ cd reactnd-project-would-you-rather
 $ npm install
 How to setup
