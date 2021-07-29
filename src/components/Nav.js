@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Link, Redirect, Navbar, NavLink } from 'react-router-dom'
+import { Redirect, NavLink } from 'react-router-dom'
 import { deleteAuthedUser } from '../actions/authedUser'
 
 
@@ -24,8 +24,10 @@ class Nav extends Component {
                         <li><NavLink to='/add' activeClassName='active'>New Question</NavLink></li>
                         <li><NavLink to='/leaderboard' activeClassName='active'>Leaderboard</NavLink></li>
                         <li><NavLink to='/' activeClassName='active' onClick={this.logout}>Logout</NavLink></li>
+                        <li><NavLink to='#' activeClassName='active' >Hello, {loggedInUser.name}</NavLink></li>
+
                     </ul>
-                    <div className="navText">Hello, {loggedInUser.name}</div>
+
                 </nav>
             </div>
 

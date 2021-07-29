@@ -1,34 +1,54 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-//import { Tab } from 'semantic-ui-react';
-//import UserCard from './UserCard';
-import Nav from './Nav'
+import { Container, Col, Nav } from 'react-bootstrap'
+import Poll from './Poll'
+import '../index.css'
+
 
 
 export class Dashboard extends Component {
     static propTypes = {
         userQuestionData: PropTypes.object.isRequired
-    };
+    }
+
+    state = {
+        answeredUnanswered: false
+    }
+
+    updateUnanswered = () => {
+        this.setState({ answeredUnanswered: false })
+    }
+    updateAnswered = () => {
+        this.setState({ answeredUnanswered: true })
+    }
     render() {
 
-        const { userQuestionData } = this.props;
-        console.log('HELLO', userQuestionData)
-        //return <Tab panes={panes({ userQuestionData })} className="tab" />;
         return (
             <div>
-                <h1>{userQuestionData.answered[0].id}</h1>
+
+                <Container>
+                    <Col xs={6} md={6}>
+                        <Nav justify variant="tabs" defaultActiveKey="link-1">
+                            <Nav.Item>
+                                <Nav.Link eventKey="link-1" onClick={this.updateUnanswered}>Unanswered</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                                <Nav.Link eventKey="link-2" onClick={this.updateAnswered}>Answered</Nav.Link>
+                            </Nav.Item>
+                        </Nav>
+                        {this.state.answeredUnanswered === false ? (
+                            this.props.userQuestionData.unanswered.map(question => (
+                                <Poll key={question.id} quest={question} />
+                            ))
+                        ) : this.props.userQuestionData.answered.map((question) => (
+                            <Poll key={question.id} quest={question} />
+                        ))}
 
 
-                {userQuestionData.unanswered.map(question => (
-                    <UserCard
-                        key={question.id}
-                        question_id={question.id}
-                        unanswered={false}
-                    />
-                ))}
+                    </Col>
+                </Container>
             </div>
-
         )
 
     }
@@ -40,10 +60,10 @@ function mapStateToProps({ authedUser, users, questions }) {
 
     const answeredIds = Object.keys(users[authedUser].answers);
     const answered = Object.values(questions)
-        .filter(question => !answeredIds.includes(question.id))
+        .filter(question => answeredIds.includes(question.id))
         .sort((a, b) => b.timestamp - a.timestamp);
     const unanswered = Object.values(questions)
-        .filter(question => answeredIds.includes(question.id))
+        .filter(question => !answeredIds.includes(question.id))
         .sort((a, b) => b.timestamp - a.timestamp);
 
     return {

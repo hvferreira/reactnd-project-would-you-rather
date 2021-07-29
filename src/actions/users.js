@@ -19,10 +19,10 @@ export function addQuestionToUser({ id, author }) {
 }
 
 
-export function addAnswerToUser(authUser, questionId, answer) {
+export function addAnswerToUser(authedUser, questionId, answer) {
     return {
         type: ADD_ANSWER_TO_USER,
-        authUser,
+        authedUser,
         questionId,
         answer
     }

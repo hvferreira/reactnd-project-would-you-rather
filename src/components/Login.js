@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { setAuthedUser } from "../actions/authedUser";
 
-class LoginPage extends Component {
+class Login extends Component {
     state = {
         selectedUser: "none",
     };
@@ -24,13 +24,11 @@ class LoginPage extends Component {
     handleUserLogin = (event) => {
         event.preventDefault();
         const { selectedUser } = this.state;
-        const { history, location, setAuthedUser } = this.props;
+        const { setAuthedUser } = this.props;
         if (selectedUser === "none") return;
-        setAuthedUser(selectedUser);
-        // location.state
-        //     ? history.push(location.state.returnPath)
-        //     : history.push("/");
-    };
+        setAuthedUser(selectedUser)
+
+    }
 
     handleChange = (event) => {
         this.setState({ selectedUser: event.target.value });
@@ -74,4 +72,4 @@ const mapDispatchToProps = (dispatch) => ({
     setAuthedUser: (userID) => dispatch(setAuthedUser(userID)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

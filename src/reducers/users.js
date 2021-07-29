@@ -17,19 +17,19 @@ export default function users(state = {}, action) {
                 ...state,
                 [author]: {
                     ...state[author],
-                    question: state[author].question.concat(id)
+                    questions: state[author].questions.concat(id)
                 }
             };
         case ADD_ANSWER_TO_USER:
-            const { authUser, questionId, answer } = action;
+            const { authedUser, qid, answer } = action;
 
             return {
                 ...state,
-                [authUser]: {
-                    ...state[authUser],
-                    answer: {
-                        ...state[authUser].answer,
-                        [questionId]: answer
+                [authedUser]: {
+                    ...state[authedUser],
+                    answers: {
+                        ...state[authedUser].answers,
+                        [qid]: answer
                     }
                 }
 

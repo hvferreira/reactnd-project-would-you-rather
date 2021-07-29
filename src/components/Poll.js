@@ -13,16 +13,17 @@ class Poll extends Component {
                     <Card.Text>
                         Would you rather
                     </Card.Text>
-                    <Link to={`/questions/${this.props.ques.id}`}><Button variant="primary" block onClick={this.routeChange}>View Poll</Button></Link>
+                    <Link to={`/questions/${this.props.quest.id}`}><Button variant="primary" block onClick={this.routeChange}>View Poll</Button></Link>
                 </Card.Body>
             </Card>
         )
     }
 }
 
-function mapStateToProps({ users }, { ques }) {
+function mapStateToProps({ users }, { quest }) {
+
     return {
-        questionAuthor: users[ques.author]
+        questionAuthor: users[quest.author]
     }
 }
 
